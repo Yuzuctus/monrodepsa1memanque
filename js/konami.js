@@ -15,13 +15,14 @@ var konamiSeq = [
 var konamiIdx = 0;
 var partyTimer = null;
 
-// ---------- Party mode: 2s of color and sped-up music ----------
+// ---------- Party mode: 5s of color and sped-up music ----------
 
 function triggerPartyMode() {
   if (partyTimer) return;
   var html = document.documentElement;
   html.classList.add("party-mode");
   var audio = document.getElementById("music");
+  if (!audio) return;
   var origRate = audio.playbackRate;
   audio.playbackRate = 1.8;
   partyTimer = setTimeout(function () {

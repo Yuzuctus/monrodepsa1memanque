@@ -12,6 +12,7 @@ function startSite() {
   document.getElementById("overlay").style.display = "none";
 
   var audio = document.getElementById("music");
+  if (!audio) return;
   audio.currentTime = 4;
   audio.volume = 0;
   var p = audio.play();

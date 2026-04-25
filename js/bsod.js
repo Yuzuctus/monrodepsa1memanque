@@ -53,6 +53,7 @@ function tenterReparation() {
 
   var fill = document.getElementById("bsod-progress-fill");
   var label = document.getElementById("bsod-progress-label");
+  if (!fill || !label) return;
   fill.style.width = "0%";
         label.textContent = "0% terminé";
 
@@ -148,16 +149,21 @@ function bsodRetry() {
 function showBSODError() {
   var err = erreurs[Math.floor(Math.random() * erreurs.length)];
   var popup = document.getElementById("bsod-popup");
+  if (!popup) return;
   popup.querySelector(".bsod-face").textContent = ":(";
   popup.querySelector(".bsod-title").textContent = err.header;
   popup.querySelector(".bsod-body").innerHTML = err.body.replace(/\n/g, "<br>");
-  document.getElementById("bsod-progress-label").style.display = "none";
-  document.querySelector("#bsod-popup .bsod-progress-bar").style.display = "none";
+  var progressLabel = document.getElementById("bsod-progress-label");
+  if (progressLabel) { progressLabel.style.display = "none"; }
+  var progressBar = document.querySelector("#bsod-popup .bsod-progress-bar");
+  if (progressBar) { progressBar.style.display = "none"; }
   popup.querySelector(".bsod-qr").innerHTML =
     '💡 Oh vous avez cassé, il lui en faut un autre :<br>rode.com/psa1 (@Yuzuctus sur discord)';
   var btn = popup.querySelector(".bsod-btn");
-  btn.textContent = "FERMER";
-  btn.onclick = closeAll;
+  if (btn) {
+    btn.textContent = "FERMER";
+    btn.onclick = closeAll;
+  }
 }
 
 // ---------- Close BSOD and show error ----------
@@ -172,18 +178,21 @@ function closeBSOD() {
 function closeAll() {
   window.terminalOpen = false;
   clearTimeout(bsodTimer);
-  document.getElementById("bsod-popup").style.display = "none";
-  document.getElementById("bsod-overlay").style.display = "none";
+  var popup = document.getElementById("bsod-popup");
+  var overlay = document.getElementById("bsod-overlay");
+  if (popup) { popup.style.display = "none"; }
+  if (overlay) { overlay.style.display = "none"; }
 }
 
 // ---------- Event bindings ----------
 
 function initBSOD() {
-  document
-    .getElementById("bsod-overlay")
-    .addEventListener("click", function (e) {
+  var overlay = document.getElementById("bsod-overlay");
+  if (overlay) {
+    overlay.addEventListener("click", function (e) {
       if (e.target === this) closeBSOD();
     });
+  }
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && window.terminalOpen) {
@@ -192,7 +201,8 @@ function initBSOD() {
   });
 
   // Bind the repair button
-  document
-    .querySelector(".repair-btn")
-    .addEventListener("click", tenterReparation);
+  var repairBtn = document.querySelector(".repair-btn");
+  if (repairBtn) {
+    repairBtn.addEventListener("click", tenterReparation);
+  }
 }

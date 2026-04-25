@@ -23,6 +23,9 @@
   --z-overlay-start: 10000;
   --z-overlay-bsod: 10001;
   --z-bsod-popup: 10002;
+  --z-chaos: 10003;
+  --z-gpt-panel: 10004;
+  --z-toast: 10005;
   --z-cursor: 10010;
 }
 
@@ -537,9 +540,177 @@ html.party-mode .photo-container {
   box-shadow: 0 0 20px gold, 0 0 0 2px gold, 0 0 0 4px #1a1a1a !important;
 }
 
-html.party-mode body *:not(.emoji-rain):not(audio):not(source) {
+html.party-mode body *:not(.emoji-rain):not(audio):not(source):not(h1) {
   animation: spin 0.24s linear infinite !important;
   transform-origin: center center;
+}
+
+/* ==========================================================================
+   Joy Overdrive (cookie checkbox visual twist)
+   ========================================================================== */
+
+html.joy-overdrive body::after {
+  filter: none !important;
+  animation: rainbowBg 0.45s linear infinite;
+}
+
+html.joy-overdrive #cookie-banner {
+  border-color: #f5d43f;
+  box-shadow:
+    0 0 0 2px rgba(245, 212, 63, 0.45),
+    0 10px 28px rgba(0, 0, 0, 0.55);
+}
+
+html.joy-overdrive .cookie-title,
+html.joy-overdrive .cookie-section {
+  color: #ffe67a;
+}
+
+#joy-confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-chaos);
+  overflow: hidden;
+}
+
+.joy-confetti-piece {
+  position: absolute;
+  top: -12px;
+  opacity: 0;
+  border-radius: 2px;
+  animation-name: confettiDrop;
+  animation-timing-function: cubic-bezier(0.28, 0.82, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+/* ==========================================================================
+   Mourning Toasts + Fake GPT Panel
+   ========================================================================== */
+
+#mourning-toast-host {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--marquee-safe-area) + 10px);
+  transform: translateX(-50%);
+  width: min(94vw, 560px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  z-index: var(--z-toast);
+}
+
+.mourning-toast {
+  width: fit-content;
+  max-width: 100%;
+  background: rgba(24, 24, 24, 0.94);
+  color: #f3f3f3;
+  border: 1px solid #555;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.84rem;
+  text-shadow: 1px 1px 0 #000;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.34);
+  opacity: 0;
+  transform: translateY(9px) scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mourning-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.mourning-toast.toast-danger {
+  border-color: #ff8b8b;
+  background: rgba(55, 18, 18, 0.95);
+  color: #ffd9d9;
+}
+
+.mourning-toast.toast-success {
+  border-color: #89ffa9;
+  background: rgba(14, 52, 23, 0.95);
+  color: #d9ffde;
+}
+
+#cookie-gpt-panel {
+  position: fixed;
+  right: 12px;
+  bottom: calc(var(--marquee-safe-area) + 12px);
+  width: min(370px, calc(100vw - 24px));
+  background: rgba(20, 20, 20, 0.97);
+  border: 1px solid #5a5a5a;
+  border-radius: 10px;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
+  color: #f1f1f1;
+  padding: 12px;
+  box-sizing: border-box;
+  z-index: var(--z-gpt-panel);
+  opacity: 0;
+  transform: translateY(8px) scale(0.985);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#cookie-gpt-panel.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.cookie-gpt-title {
+  font-size: 0.92rem;
+  font-weight: bold;
+  color: #ffd1d1;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+#cookie-gpt-panel.is-loading .cookie-gpt-title::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-top-color: #ff7a7a;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.cookie-gpt-body {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: #e7e7e7;
+  margin-bottom: 10px;
+}
+
+#cookie-gpt-panel.is-loading .cookie-gpt-body {
+  animation: gptPulse 0.85s ease-in-out infinite;
+}
+
+.cookie-gpt-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cookie-gpt-thumb {
+  font-family: var(--font-comic);
+  font-size: 0.82rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(180deg, #505050 0%, #2f2f2f 100%);
+  border: 1px solid #777;
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: none;
+}
+
+.cookie-gpt-thumb:hover {
+  border-color: #ff8787;
+  box-shadow: 0 0 0 2px rgba(255, 135, 135, 0.15);
 }
 
 /* ==========================================================================
@@ -798,6 +969,20 @@ html.party-mode body *:not(.emoji-rain):not(audio):not(source) {
     display: none;
   }
 
+  #cookie-gpt-panel {
+    right: 8px;
+    left: 8px;
+    width: auto;
+  }
+
+  #mourning-toast-host {
+    width: calc(100vw - 16px);
+  }
+
+  .mourning-toast {
+    border-radius: 10px;
+  }
+
   .speech-btn {
     width: 100%;
     max-width: 320px;
@@ -818,8 +1003,8 @@ html.party-mode body *:not(.emoji-rain):not(audio):not(source) {
 
 @media (max-width: 600px) {
   .container {
-    min-height: calc(100vh - 72px);
-    min-height: calc(100dvh - 72px);
+    min-height: calc(100vh - var(--marquee-safe-area));
+    min-height: calc(100dvh - var(--marquee-safe-area));
     padding-bottom: 12px;
   }
   .emoji-rain {
