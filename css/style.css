@@ -1,0 +1,480 @@
+/* ==========================================================================
+   CSS Custom Properties
+   ========================================================================== */
+
+:root {
+  --font-comic: "Comic Sans MS", "Comic Sans", cursive;
+  --font-bsod: "Segoe UI", "Arial", sans-serif;
+  --font-serif: serif;
+
+  --color-bg-overlay: rgba(0, 0, 0, 0.85);
+  --color-bsod-bg: #0078d7;
+  --color-bsod-border: #004a8a;
+  --color-marquee-bg: rgba(0, 0, 0, 0.75);
+  --color-counter: yellow;
+  --color-epitaph: white;
+  --color-rain: rgba(0, 0, 0, 0.7);
+
+  --z-bg: -1;
+  --z-content: 1;
+  --z-marquee: 2;
+  --z-rain: 5;
+  --z-overlay-start: 10000;
+  --z-overlay-bsod: 10001;
+  --z-bsod-popup: 10002;
+  --z-cursor: 10010;
+}
+
+/* ==========================================================================
+   Reset & Body
+   ========================================================================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-comic);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Full-page tiled background with grayscale + sepia filter */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/bras.jpg");
+  background-repeat: repeat;
+  background-size: clamp(180px, 40vw, 500px) clamp(130px, 25vw, 400px);
+  filter: grayscale(100%) sepia(20%);
+  z-index: var(--z-bg);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ==========================================================================
+   Intro Overlay (click-to-start)
+   ========================================================================== */
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg-overlay);
+  z-index: var(--z-overlay-start);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+  padding: 20px;
+  cursor: none;
+}
+
+#overlay .big-emoji {
+  font-size: clamp(4rem, 15vw, 8rem);
+  animation: bounce 1s infinite;
+}
+
+/* ==========================================================================
+   Custom Cursor (desktop only)
+   ========================================================================== */
+
+#cursor {
+  position: fixed;
+  font-size: 28px;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-14px, -14px);
+  animation: pulse 0.8s infinite;
+  display: none;
+}
+
+/* ==========================================================================
+   Main Container
+   ========================================================================== */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  z-index: var(--z-content);
+  padding: 20px;
+  padding-bottom: 80px;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Title (H1)
+   ========================================================================== */
+
+h1 {
+  font-size: clamp(2rem, 7vw, 5.5rem);
+  color: red;
+  text-shadow:
+    3px 3px 0 black,
+    6px 6px 0 rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 10px 20px;
+  margin: 15px 0 5px 0;
+  animation: shake 0.5s infinite;
+}
+
+/* ==========================================================================
+   Counter (days since death)
+   ========================================================================== */
+
+#counter {
+  font-size: clamp(1rem, 3.5vw, 1.8rem);
+  color: var(--color-counter);
+  text-shadow: 2px 2px 0 black;
+  text-align: center;
+  margin: 10px;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Epitaph (dates line)
+   ========================================================================== */
+
+.epitaph {
+  color: var(--color-epitaph);
+  text-shadow: 2px 2px 0 black;
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  text-align: center;
+  margin: 5px;
+}
+
+/* ==========================================================================
+   Photo Frame (R.I.P. picture)
+   ========================================================================== */
+
+.photo-container {
+  margin: 20px;
+  text-align: center;
+  border: 8px solid #1a1a1a;
+  border-bottom: 12px solid #1a1a1a;
+  box-shadow:
+    0 0 0 2px #444,
+    0 0 0 4px #1a1a1a,
+    0 8px 25px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  background: #0a0a0a;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+}
+
+.photo-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: repeating-linear-gradient(
+    90deg,
+    #1a1a1a 0px,
+    #1a1a1a 8px,
+    #333 8px,
+    #333 10px
+  );
+  z-index: 2;
+}
+
+.photo-container::after {
+  content: "R.I.P.";
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #888;
+  font-size: 12px;
+  letter-spacing: 5px;
+  text-shadow: 0 0 3px black;
+  z-index: 2;
+  font-family: var(--font-serif);
+}
+
+.disaster-photo {
+  width: 100%;
+  display: block;
+  filter: grayscale(50%);
+  margin-top: 28px;
+}
+
+.photo-caption {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  font-style: italic;
+  padding: 8px;
+  text-shadow: 1px 1px 0 black;
+  text-align: right;
+}
+
+/* ==========================================================================
+   Repair Button
+   ========================================================================== */
+
+.repair-btn {
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  padding: clamp(14px, 3vw, 22px) clamp(30px, 8vw, 55px);
+  background: linear-gradient(180deg, #ff2222 0%, #cc0000 50%, #990000 100%);
+  color: #fff;
+  border: none;
+  cursor: none;
+  animation:
+    bounce 0.8s infinite,
+    glow 1.5s infinite;
+  font-family: var(--font-comic);
+  font-weight: bold;
+  margin: 15px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 0 15px #ff0000,
+    0 0 40px #ff0000,
+    0 0 80px rgba(255, 0, 0, 0.5),
+    0 6px 0 #550000,
+    0 8px 20px rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  position: relative;
+}
+
+.repair-btn:active {
+  transform: translateY(4px);
+  box-shadow:
+    0 0 10px #ff0000,
+    0 0 25px #ff0000,
+    0 0 50px rgba(255, 0, 0, 0.5),
+    0 2px 0 #550000,
+    0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.repair-btn:hover {
+  animation:
+    spin 0.25s infinite,
+    glow 0.5s infinite;
+  box-shadow:
+    0 0 25px #ff4444,
+    0 0 60px #ff0000,
+    0 0 120px rgba(255, 0, 0, 0.8),
+    0 6px 0 #550000,
+    0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   Bottom Marquee (scrolling banner)
+   ========================================================================== */
+
+.marquee-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: var(--color-marquee-bg);
+  padding: 12px 0;
+  overflow: hidden;
+  z-index: var(--z-marquee);
+  white-space: nowrap;
+}
+
+.marquee-bar span {
+  display: inline-block;
+  font-size: clamp(1rem, 3vw, 2rem);
+  color: white;
+  animation: marquee 45s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-bar span::after {
+  content: attr(data-text);
+}
+
+/* ==========================================================================
+   BSOD Popup
+   ========================================================================== */
+
+#bsod-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: var(--z-overlay-bsod);
+}
+
+#bsod-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-bsod-bg);
+  color: #fff;
+  font-family: var(--font-bsod);
+  z-index: var(--z-bsod-popup);
+  width: 90%;
+  max-width: 500px;
+  padding: 30px 25px 20px 25px;
+  box-shadow:
+    0 0 0 4px var(--color-bsod-border),
+    0 0 0 8px var(--color-bsod-bg),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+  text-align: left;
+  line-height: 1.6;
+}
+
+#bsod-popup .bsod-face {
+  font-size: 6rem;
+  margin-bottom: 5px;
+  font-weight: 100;
+  line-height: 1;
+}
+
+#bsod-popup .bsod-title {
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+#bsod-popup .bsod-body {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+#bsod-popup .bsod-progress-text {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+#bsod-popup .bsod-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+#bsod-popup .bsod-progress-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.3s linear;
+}
+
+#bsod-popup .bsod-qr {
+  font-size: 0.7rem;
+  opacity: 0.5;
+  margin-top: 10px;
+}
+
+#bsod-popup .bsod-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.85rem;
+  cursor: none;
+}
+
+#bsod-popup .bsod-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ==========================================================================
+   Emoji Rain
+   ========================================================================== */
+
+.emoji-rain {
+  position: fixed;
+  top: 0;
+  pointer-events: none;
+  z-index: var(--z-rain);
+  opacity: 0.85;
+  filter: grayscale(100%);
+}
+
+/* ==========================================================================
+   Konami Code Feedback
+   ========================================================================== */
+
+.konami-step {
+  animation: konamiFlash 0.35s ease-out;
+}
+
+/* ==========================================================================
+   Party Mode (Konami Easter Egg — 2 seconds of joy then back to grief)
+   ========================================================================== */
+
+html.party-mode body::after {
+  filter: none !important;
+  animation: rainbowBg 0.5s linear infinite;
+}
+
+html.party-mode h1 {
+  color: gold !important;
+  text-shadow: 0 0 25px gold, 0 0 60px orange, 3px 3px 0 black !important;
+  animation: shake 0.2s infinite !important;
+}
+
+html.party-mode .epitaph {
+  color: cyan !important;
+  text-shadow: 0 0 15px cyan, 2px 2px 0 black !important;
+}
+
+html.party-mode #counter {
+  color: hotpink !important;
+  text-shadow: 0 0 15px hotpink, 2px 2px 0 black !important;
+}
+
+html.party-mode .marquee-bar span {
+  color: lime !important;
+}
+
+html.party-mode .photo-container {
+  border-color: gold !important;
+  box-shadow: 0 0 20px gold, 0 0 0 2px gold, 0 0 0 4px #1a1a1a !important;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .container {
+    padding-bottom: 70px;
+  }
+  .emoji-rain {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  * {
+    cursor: none;
+  }
+  #cursor {
+    display: block;
+  }
+}

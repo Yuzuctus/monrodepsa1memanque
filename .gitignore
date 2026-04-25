@@ -1,0 +1,13 @@
+# Environment
+.env
+
+# OS
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Archives
+*.zip
