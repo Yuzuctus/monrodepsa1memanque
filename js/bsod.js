@@ -10,7 +10,7 @@ var bsodTimer = null;
 var erreurs = [
   {
     header: "RODE_PSA1.SYS - ERREUR FATALE",
-    body: "Le pilote du bras de micro a cesse de fonctionner.\nCode erreur: 0xDEAD_BRAS\nAdresse: 0x00000000\n\nAppuyez sur cette fenetre pour fermer.",
+    body: "Le pilote du bras de micro a cessé de fonctionner.\nCode erreur: 0xDEAD_BRAS\nAdresse: 0x00000000\n\nAppuyez sur cette fenêtre pour fermer.",
   },
   {
     header: "KERNEL PANIC",
@@ -18,19 +18,19 @@ var erreurs = [
   },
   {
     header: "SEGFAULT",
-    body: 'Segmentation fault (core dumped)\n\nThread 1 "RodePSA1" received signal SIGSEGV.\n0x00007f8a2c3d1e in bras_support () from /lib/libtristesse.so\n\n(gdb) bt\n#0  0x00007f8a2c3d1e in bras_support ()\n#1  0x0000000000000000 in ?? ()\n\nNo stack. Le bras est litteralement tombe dans le vide.',
+    body: 'Segmentation fault (core dumped)\n\nThread 1 "RodePSA1" received signal SIGSEGV.\n0x00007f8a2c3d1e in bras_support () from /lib/libtristesse.so\n\n(gdb) bt\n#0  0x00007f8a2c3d1e in bras_support ()\n#1  0x0000000000000000 in ?? ()\n\nNo stack. Le bras est littéralement tombé dans le vide.',
   },
   {
     header: "BSOD - BRAS_SYSTEM_FAILURE",
-    body: "*** STOP: 0x000000BRAS (0xR0DE_PSA1, 0x00000000)\n\nLe systeme a detecte une absence critique de materiel.\n\nSi c'est la premiere fois que vous voyez cet ecran,\nc'est que votre Rode PSA1 est bel et bien mort.\n\n*** RODE_PSA1.SYS - Address F7B8A2C3 base at F7B8A000",
+    body: "*** STOP: 0x000000BRAS (0xR0DE_PSA1, 0x00000000)\n\nLe système a détecté une absence critique de matériel.\n\nSi c'est la première fois que vous voyez cet écran,\nc'est que votre Rode PSA1 est bel et bien mort.\n\n*** RODE_PSA1.SYS - Address F7B8A2C3 base at F7B8A000",
   },
   {
     header: "ERREUR 404",
-    body: "GET /bras-de-micro HTTP/1.1\nHost: bureau.local\n\nHTTP/1.1 404 Not Found\nContent-Type: text/tristesse\n\nLe bras de micro demande est introuvable sur ce bureau.\nVerifiez l'URL ou achetez-en un nouveau.\n\nConsole: > ping RodePSA1\nPING RodePSA1.local: 56 data bytes\nRequest timeout.\nRequest timeout.\nRequest timeout.\n\n--- RodePSA1 ping statistics ---\n3 packets transmitted, 0 received, 100% packet loss",
+    body: "GET /bras-de-micro HTTP/1.1\nHost: bureau.local\n\nHTTP/1.1 404 Not Found\nContent-Type: text/tristesse\n\nLe bras de micro demandé est introuvable sur ce bureau.\nVérifiez l'URL ou achetez-en un nouveau.\n\nConsole: > ping RodePSA1\nPING RodePSA1.local: 56 data bytes\nRequest timeout.\nRequest timeout.\nRequest timeout.\n\n--- RodePSA1 ping statistics ---\n3 packets transmitted, 0 received, 100% packet loss",
   },
   {
     header: "NULL POINTER EXCEPTION",
-    body: "java.lang.NullPointerException\n    at Bureau.microSupport(Bureau.java:42)\n    at Setup.getBras(Setup.java:13)\n    at Audio.record(Audio.java:7)\n\nCause: Le micro flotte dans le vide. Aucun support detecte.\nResolution: Acheter un nouveau Rode PSA1.\n\n(Le garbage collector ne peut rien pour toi.)",
+    body: "java.lang.NullPointerException\n    at Bureau.microSupport(Bureau.java:42)\n    at Setup.getBras(Setup.java:13)\n    at Audio.record(Audio.java:7)\n\nCause : Le micro flotte dans le vide. Aucun support détecté.\nRésolution : Acheter un nouveau Rode PSA1.\n\n(Le garbage collector ne peut rien pour toi.)",
   },
   {
     header: "STACK OVERFLOW",
@@ -54,7 +54,7 @@ function tenterReparation() {
   var fill = document.getElementById("bsod-progress-fill");
   var label = document.getElementById("bsod-progress-label");
   fill.style.width = "0%";
-  label.textContent = "0% termine";
+        label.textContent = "0% terminé";
 
   // Reset popup to initial progress state (in case it was previously showing an error)
   document.getElementById("bsod-progress-label").style.display = "";
@@ -80,19 +80,19 @@ function animateBSODProgress(target) {
       var inc = Math.random() * 6 + 1.5;
       current = Math.min(current + inc, target);
       fill.style.width = current + "%";
-      label.textContent = Math.floor(current) + "% termine";
+      label.textContent = Math.floor(current) + "% terminé";
       bsodTimer = setTimeout(step, Math.random() * 180 + 40);
     } else if (loops < 2) {
-      label.textContent = target + "% termine — ECHEC, nouvel essai...";
+      label.textContent = target + "% terminé — ÉCHEC, nouvel essai...";
       bsodTimer = setTimeout(function () {
         current = 0;
         loops++;
         fill.style.width = "0%";
-        label.textContent = "0% termine";
+  label.textContent = "0% terminé";
         step();
       }, 800);
     } else {
-      label.textContent = target + "% termine — ECHEC";
+      label.textContent = target + "% terminé — ÉCHEC";
       btn.textContent = "ABANDON";
       btn.onclick = closeBSOD;
       bsodTimer = setTimeout(closeBSOD, 3000);
@@ -125,7 +125,7 @@ function bsodRetry() {
       label.textContent = Math.floor(current) + "% fermeture";
       bsodTimer = setTimeout(step, Math.random() * 200 + 60);
     } else if (loops < 2) {
-      label.textContent = target + "% fermeture — ECHEC, nouvel essai...";
+      label.textContent = target + "% fermeture — ÉCHEC, nouvel essai...";
       bsodTimer = setTimeout(function () {
         current = 0;
         loops++;
@@ -134,7 +134,7 @@ function bsodRetry() {
         step();
       }, 800);
     } else {
-      label.textContent = target + "% fermeture — ECHEC";
+      label.textContent = target + "% fermeture — ÉCHEC";
       btn.textContent = "FERMER DE FORCE";
       btn.onclick = closeBSOD;
       bsodTimer = setTimeout(closeBSOD, 3000);
@@ -154,7 +154,7 @@ function showBSODError() {
   document.getElementById("bsod-progress-label").style.display = "none";
   document.querySelector("#bsod-popup .bsod-progress-bar").style.display = "none";
   popup.querySelector(".bsod-qr").innerHTML =
-    '💡 Oh vous avez cas lui en acheter un autre :<br>rode.com/psa1 (@Yuzuctus sur discord)';
+    '💡 Oh vous avez cassé, il lui en faut un autre :<br>rode.com/psa1 (@Yuzuctus sur discord)';
   var btn = popup.querySelector(".bsod-btn");
   btn.textContent = "FERMER";
   btn.onclick = closeAll;

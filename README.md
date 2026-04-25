@@ -2,7 +2,7 @@
 
 > RIP 2020 – 23/04/2026 19:54. The greatest microphone arm that ever lived.  
 > It never failed me. Until that fateful day.
-> A tribute page for a broken Rode PSA1. Black humor, BSOD popups, fake repair attempts that always fail, emoji rain, vine booms on every click, and a Konami code that grants you 2 seconds of happiness before dragging you back into grief.
+> A tribute page for a broken Rode PSA1. Black humor, BSOD popups, fake repair attempts that always fail, emoji rain, vine booms on every click, and a Konami code that grants you 5 seconds of happiness before dragging you back into grief.
 
 ## **[monrodepsa1memanque.yuzuctus.fr](https://monrodepsa1memanque.yuzuctus.fr/)**
 
@@ -22,6 +22,7 @@ Pure vanilla — no frameworks, no bundler, no npm.
 │   ├── bras.jpg             #   Tiled background (Rode PSA1 render)
 │   ├── coffindancerodepsa1casser.jpg  # Disaster photo
 │   ├── conffindancemusic.mp3           # Background mourning music
+│   ├── Discours-Hommage.mp3            # Spoken tribute to the arm
 │   └── vine-boom-onclic.mp3            # Click sound effect
 ├── css/
 │   ├── style.css            # Layout, components, BSOD, marquee, party mode
@@ -39,22 +40,8 @@ Pure vanilla — no frameworks, no bundler, no npm.
 
 | Trigger                              | Effect                                                                                                              |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| **Konami Code** `↑↑↓↓←→←→ B A Enter` | 2-second party mode: rainbow background, sped-up music, then back to grayscale grief                                |
+| **Konami Code** `↑↑↓↓←→←→ B A Enter` | 5-second party mode: rainbow background, sped-up music, then back to grayscale grief                                |
 | Click anywhere at any time           | Vine boom sound effect                                                                                              |
-| **"TENTER DE REPARER"** button       | BSOD popup with fake progress bars that always fail, then a random system error (KERNEL PANIC, SEGFAULT, 404, etc.) |
+| **"LIRE LE DISCOURS D'HOMMAGE"**     | Plays `assets/Discours-Hommage.mp3` and ducks background music during the tribute                                  |
+| **"TENTER DE RÉPARER"** button       | BSOD popup with fake progress bars that always fail, then a random system error (KERNEL PANIC, SEGFAULT, 404, etc.) |
 | Hover the repair button              | It spins violently                                                                                                  |
-
-## Deploy
-
-Deployed on **Cloudflare Pages** via **GitHub Actions** (`cloudflare/wrangler-action@v3`).
-
-Every push to `master` triggers an automatic deploy — no manual steps.
-
-### GitHub Secrets
-
-| Secret | Description |
-|--------|-------------|
-| `CLOUDFLARE_API_TOKEN` | Cloudflare API token (scope: Cloudflare Pages — Edit) |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID |
-
-`GITHUB_TOKEN` is provided automatically by GitHub Actions (permissions: `contents: read`, `deployments: write`).

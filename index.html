@@ -6,11 +6,11 @@
     <title>Mon Rode PSA1 me manque - RIP 2020-2026</title>
     <meta
       name="description"
-      content="RIP Rode PSA1 — 2020-2026. Il ne m'a jamais lache jusqu'a ce jour funeste."
+      content="RIP Rode PSA1 — 2020-2026. Il ne m'a jamais lâché jusqu'à ce jour funeste."
     />
     <meta
       name="keywords"
-      content="Rode PSA1, bras de micro, micro, regret, manque, tristesse, RIP, deces, panne, casse, mort, monument, monexmemanque, yuzuctus"
+      content="Rode PSA1, bras de micro, micro, regret, manque, tristesse, RIP, décès, panne, cassé, mort, monument, monexmemanque, yuzuctus"
     />
     <meta name="author" content="Sammy" />
     <meta name="robots" content="index, follow" />
@@ -28,7 +28,7 @@
     />
     <meta
       property="og:image"
-      content="https://monrodepsa1memanque.yuzuctus.fr/bras.jpg"
+      content="https://monrodepsa1memanque.yuzuctus.fr/assets/bras.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -44,11 +44,11 @@
     <meta name="twitter:title" content="Mon Rode PSA1 me manque" />
     <meta
       name="twitter:description"
-      content="2020 - 23/04/2026 19:54. RIP mon bras de micro legendaire."
+      content="2020 - 23/04/2026 19:54. RIP mon bras de micro légendaire."
     />
     <meta
       name="twitter:image"
-      content="https://monrodepsa1memanque.yuzuctus.fr/bras.jpg"
+      content="https://monrodepsa1memanque.yuzuctus.fr/assets/bras.jpg"
     />
 
     <script type="application/ld+json">
@@ -57,7 +57,7 @@
         "@type": "WebSite",
         "name": "Mon Rode PSA1 me manque",
         "url": "https://monrodepsa1memanque.yuzuctus.fr/",
-        "description": "Mon Rode PSA1 est mort le 23 avril 2026. Un bras de micro legendaire achete en 2020. Pleure avec moi.",
+        "description": "Mon Rode PSA1 est mort le 23 avril 2026. Un bras de micro légendaire acheté en 2020. Pleure avec moi.",
         "author": { "@type": "Person", "name": "Sammy" }
       }
     </script>
@@ -84,26 +84,81 @@
       <div class="photo-container">
         <img
           src="assets/coffindancerodepsa1casser.jpg"
-          alt="Photo du desastre"
+          alt="Photo du désastre"
           class="disaster-photo"
         />
         <div class="photo-caption">📸 Photo non contractuelle</div>
       </div>
 
       <h1>MON RODE PSA1 ME MANQUE</h1>
-      <button class="repair-btn">TENTER DE REPARER</button>
+      <button class="repair-btn">TENTER DE RÉPARER</button>
+      <div class="tribute-controls">
+        <button id="speech-btn" class="speech-btn" type="button">
+          🎙️ LIRE LE DISCOURS D'HOMMAGE
+        </button>
+        <div id="speech-status" class="speech-status" aria-live="polite">
+          Appuie pour écouter mon hommage solennel au bras de micro défunt.
+        </div>
+      </div>
     </div>
+
+    <!-- Cookie Banner Troll -->
+    <div id="cookie-banner">
+      <div class="cookie-title">🍪 Le RGPDrame du Rode PSA1</div>
+      <div class="cookie-scroll">
+        <div class="cookie-section">Le consentement au drame</div>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Accepter que mon bras de micro soit définitivement cassé</label>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Autoriser les larmes numériques à pleuvoir sur mon écran</label>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Permettre à mon curseur d'être un cœur brisé</label>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Consentir à ce que le Konami code ne le ramènera pas à la vie</label>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Valider que ce site ne collecte strictement aucune information</label>
+
+        <div class="cookie-section">Les choix impossibles</div>
+        <label class="cookie-opt" id="cookie-cry"><input type="checkbox"> Refuser de pleurer</label>
+        <label class="cookie-opt" id="cookie-refund"><input type="checkbox"> <span class="refund-text">Exiger un remboursement à Rode</span></label>
+        <label class="cookie-opt undo-hover" id="cookie-undo"><input type="checkbox"> <span class="undo-text">Annuler la mort de mon bras de micro</span></label>
+        <label class="cookie-opt" id="cookie-petition"><input type="checkbox"> Signer une pétition pour le réparer</label>
+
+        <div class="cookie-section">Le pragmatique absurde</div>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Autoriser les pixels noirs à porter le deuil</label>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Autoriser le stockage de mes larmes dans le localStorage</label>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Accepter que mon navigateur pleure en cache</label>
+        <label class="cookie-opt" id="cookie-gpt"><input type="checkbox"> Demander à ChatGPT de réparer le bras</label>
+
+        <div class="cookie-section">Les choix avec twist visuel</div>
+        <label class="cookie-opt" id="cookie-joy"><input type="checkbox"> Choisir un fond joyeux</label>
+        <label class="cookie-opt" id="cookie-sad"><input type="checkbox"> Refuser la tristesse</label>
+        <label class="cookie-opt" id="cookie-moral"><input type="checkbox"> Garder le moral</label>
+
+        <div class="cookie-section">Les mentions juridiques parodiées</div>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> J'ai lu les 47 pages des conditions de mon malheur</label>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Je renonce à tout recours contre la gravité</label>
+        <label class="cookie-opt"><input type="checkbox" checked disabled> Je certifie que ce n'était pas un Rodecaster (soupir)</label>
+        <label class="cookie-opt cookie-mail-row" id="cookie-funeral">
+          Je souhaite être informé des funérailles du micro
+          <input type="text" class="cookie-mail" placeholder="votre@email.funérailles">
+          <span class="cookie-mail-msg"></span>
+        </label>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookie-reject">Tout refuser</button>
+        <button id="cookie-accept">Accepter le drame</button>
+      </div>
+      <div class="cookie-footer">Aucune information n'a été collectée, cependant.</div>
+    </div>
+
+    <div id="cookie-refund-zone" aria-live="polite"></div>
 
     <!-- Bottom scrolling banner -->
     <div class="marquee-bar">
       <span
-        >😭 IL EST PARTI TROP TOT 😭 &nbsp; RIP RODE PSA1 &nbsp; IL NE M'A
-        JAMAIS LACHE JUSQU'A CE JOUR FUNESTE &nbsp; REVIENS MON BRAS &nbsp;
+        >        😭 IL EST PARTI TROP TÔT 😭 &nbsp; RIP RODE PSA1 &nbsp; IL NE M'A
+        JAMAIS LÂCHÉ JUSQU'À CE JOUR FUNESTE &nbsp; REVIENS MON BRAS &nbsp;
         😭😭😭 &nbsp; 2020-2026 UNE VIE TROP COURTE &nbsp; TU NOUS MANQUES
         &nbsp; LE BUREAU EST VIDE SANS TOI &nbsp; PLUS JAMAIS UN BRAS NE SERA
         AUSSI SOLIDE &nbsp; 💀🪦💀 &nbsp; ON T'OUBLIERA JAMAIS &nbsp; REPOSE EN
-        PAIX PETIT BRAS &nbsp; 😿🥀⚰️ &nbsp; TU ETAIS LE MEILLEUR BRAS DE MICRO
-        DU MONDE &nbsp; DESOLE DE T'AVOIR CASSER &nbsp; 😭😭😭 &nbsp;
+        PAIX PETIT BRAS &nbsp; 😿🥀⚰️ &nbsp; TU ÉTAIS LE MEILLEUR BRAS DE MICRO
+        DU MONDE &nbsp; DÉSOLÉ DE T'AVOIR CASSÉ &nbsp; 😭😭😭 &nbsp;
         🛒 VOUS POUVEZ M'EN ACHETER UN NOUVEAU : RODE.COM/PSA1
         (@YUZUCTUS SUR DISCORD) 🛒</span
       >
@@ -117,18 +172,18 @@
       <div class="bsod-face">:(</div>
       <div class="bsod-title">BRAS_SYSTEM_FAILURE</div>
       <div class="bsod-body">
-        Votre Rode PSA1 a rencontre un probleme et doit etre repare.<br />
-        Ne vous inquietez pas, nous recoltons quelques informations,<br />
-        puis nous redemarrerons pour vous.
+        Votre Rode PSA1 a rencontré un problème et doit être réparé.<br />
+        Ne vous inquiétez pas, nous récoltons quelques informations,<br />
+        puis nous redémarrerons pour vous.
       </div>
-      <div class="bsod-progress-text" id="bsod-progress-label">0% termine</div>
+      <div class="bsod-progress-text" id="bsod-progress-label">0% terminé</div>
       <div class="bsod-progress-bar">
         <div class="bsod-progress-fill" id="bsod-progress-fill"></div>
       </div>
       <div class="bsod-qr">
-        Code d'arret : RODE_PSA1_SYS<br />
-        Ce que vous avez casse : Le support de micro<br />
-        Ou chercher de l'aide : www.rode.com (bon courage)
+        Code d'arrêt : RODE_PSA1_SYS<br />
+        Ce que vous avez cassé : Le support de micro<br />
+        Où chercher de l'aide : www.rode.com (bon courage)
       </div>
       <div class="bsod-btn">FERMER</div>
     </div>
@@ -136,6 +191,10 @@
     <!-- Background music (starts on click) -->
     <audio id="music" loop>
       <source src="assets/conffindancemusic.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="tribute-speech" preload="metadata">
+      <source src="assets/Discours-Hommage.mp3" type="audio/mpeg" />
     </audio>
 
     <!-- Scripts -->

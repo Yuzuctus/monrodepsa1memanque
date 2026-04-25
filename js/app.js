@@ -13,6 +13,7 @@ function startSite() {
 
   var audio = document.getElementById("music");
   audio.currentTime = 4;
+  audio.volume = 0;
   var p = audio.play();
   if (p !== undefined) {
     p.catch(function () {
@@ -21,12 +22,31 @@ function startSite() {
         "click",
         function go() {
           audio.currentTime = 5;
+          audio.volume = 0;
           audio.play();
+          fadeInAudio(audio, 0.5, 2000);
         },
         { once: true }
       );
+      return;
     });
   }
+
+  // Fondu audio doux pour ne pas agresser
+  fadeInAudio(audio, 0.5, 2000);
+}
+
+function fadeInAudio(audio, targetVolume, duration) {
+  var start = performance.now();
+  function step(now) {
+    var elapsed = now - start;
+    var progress = Math.min(elapsed / duration, 1);
+    audio.volume = progress * targetVolume;
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    }
+  }
+  requestAnimationFrame(step);
 }
 
 // ---------- Boot everything after DOM is ready ----------
@@ -41,6 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initCounter();
   initRain();
   initMarquee();
+  initSpeechTribute();
   initBSOD();
   initKonami();
+  initCookies();
 });

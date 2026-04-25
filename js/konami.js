@@ -28,7 +28,7 @@ function triggerPartyMode() {
     html.classList.remove("party-mode");
     audio.playbackRate = origRate;
     partyTimer = null;
-  }, 2000);
+  }, 5000);
 }
 
 // ---------- Keydown listener ----------
