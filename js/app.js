@@ -15,26 +15,32 @@ function startSite() {
   if (!audio) return;
   audio.currentTime = 4;
   audio.volume = 0;
+  audio.load();
   var p = audio.play();
   if (p !== undefined) {
-    p.catch(function () {
-      // Autoplay blocked — retry on next user interaction
-      document.addEventListener(
-        "click",
-        function go() {
-          audio.currentTime = 5;
-          audio.volume = 0;
-          audio.play();
+    p.then(function () {
+      fadeInAudio(audio, 0.5, 2000);
+    }).catch(function () {
+      var retry = function () {
+        audio.currentTime = 5;
+        audio.volume = 0;
+        audio.load();
+        var p2 = audio.play();
+        if (p2 !== undefined) {
+          p2.then(function () {
+            fadeInAudio(audio, 0.5, 2000);
+          }).catch(function () {
+            document.addEventListener("click", retry, { once: true });
+          });
+        } else {
           fadeInAudio(audio, 0.5, 2000);
-        },
-        { once: true }
-      );
-      return;
+        }
+      };
+      document.addEventListener("click", retry, { once: true });
     });
+  } else {
+    fadeInAudio(audio, 0.5, 2000);
   }
-
-  // Fondu audio doux pour ne pas agresser
-  fadeInAudio(audio, 0.5, 2000);
 }
 
 function fadeInAudio(audio, targetVolume, duration) {
